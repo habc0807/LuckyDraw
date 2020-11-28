@@ -1,5 +1,5 @@
 <template>
-  <section v-if="prizes.length>0" class="lucky-draw">
+  <section class="lucky-draw">
     <div
       v-for="(item, index) in prizes"
       :key="item.giftId"
