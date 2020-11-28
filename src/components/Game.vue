@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      prizes: [], // data奖品数组
+      prizes: this.prizesList, // data奖品数组
       arrNum: [0, 1, 2, 3, 6, 5, 4], // 转动顺序
       isRolling:  false, // 是否正在抽奖
       prizeIndex: 0, // 转动指针
@@ -46,8 +46,10 @@ export default {
   watch: {
     prizesList: {
       handle(v){
+        console.log('v:::', v);
         this.prizes = v
       },
+      deep: true,
       immediate: true
     },
     
@@ -63,7 +65,7 @@ export default {
         }
       },
       immediate: true
-    }
+    },
   },
   methods: {
     // 抽奖重置
