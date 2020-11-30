@@ -1,12 +1,13 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.min.png" />
+    <!-- <img alt="Vue logo" src="./assets/logo.min.png" /> -->
     <Game
         :prizesList="prizes"
         :resultIndex.sync="resultIndex"
         :test="test"
         @canShowResultPop="canShowResultPopHandle"
     />
+    <div class="btn" @click="onStart">抽奖</div>
   </div>
 </template>
 
@@ -22,7 +23,7 @@ export default {
   data() {
     return {
       prizes: prizes,
-      resultIndex: 3,
+      resultIndex: -1,
       test: 1,
     }
   },
@@ -33,9 +34,24 @@ export default {
   //   }, 100)
   // },
   methods: {
+    onStart() {
+      this.resultIndex = 3;
+    },
     canShowResultPopHandle() {
       // console.log('抽奖成功')
     }
   }
 }
 </script>
+<style>
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 50px;
+  background: #fc696a;
+  color: #fff;
+}
+</style>

@@ -7,6 +7,7 @@
       :class="[item.isChose  ? 'speed-chose' : '', stopIndex === index ? 'stop' : '', item.giftId === 'heart' ? 'times-9' : '' ]"
     >
       <img class="prize-item-thumb" :src="item.giftPic" :alt="index + 1" />
+      <span class="prize-index">{{index}}</span>
     </div>
   </section>
 </template>
@@ -55,6 +56,7 @@ export default {
     
     resultIndex: {
       handle(v){
+        console.log(v)
         if (v !== -1) {
           if (this.arrNum.indexOf(v) !== -1) {
             this.stopIndex = this.arrNum.indexOf(v);
@@ -136,10 +138,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .lucky-draw {
+  padding-top: 50px;
   display: flex;
-
-  height: 500px;
-  padding-top: 65px;
 
   justify-content: center;
   flex-wrap: wrap;
@@ -149,44 +149,46 @@ export default {
 
     display: flex;
 
-    width: 100px;
-    max-width: 100px;
-    height: 100px;
-    max-height: 100px;
-    margin: 0 32px 44px 32px;
+    width: 50px;
+    max-width: 50px;
+    height: 50px;
+    max-height: 50px;
+    margin: 0 16px 22px 16px;
 
-    background: url("../assets/wish-index/prize.min.png") no-repeat;
+    background: url("../assets/icons/prize.min.png") no-repeat;
+    background-size: 50px 50px;
 
     align-items: center;
     justify-content: center;
 
     .prize-item-thumb {
-      width: 70px;
-      height: 70px;
+      width: 35px;
+      height: 35px;
 
       transition: 0.3s;
       transform: scale(1);
     }
+    .prize-index {
+      color: #fc696a;
+      font-size: 12px;
+    }
     &::before {
       position: absolute;
       z-index: 3;
-      top: -10px;
-      left: -10px;
+      top: -5px;
+      left: -5px;
 
-      width: 120px;
-      height: 120px;
+      width: 60px;
+      height: 60px;
 
       content: "";
       transition: 0.5s;
 
       opacity: 0;
       background: rgba(255, 255, 255, 0.5);
-      background: url("../assets/wish-index/120-120.min.png") no-repeat;
-      background-size: 120px 120px;
+      background: url("../assets/icons/120-120.min.png") no-repeat;
+      background-size: 50px 50px;
     }
-  }
-  .times-9 {
-    background: url("../assets/wish-index/prize-9.min.png") no-repeat;
   }
   .speed-chose,
   .slow-chose {
