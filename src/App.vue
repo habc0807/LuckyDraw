@@ -30,7 +30,11 @@ export default {
       console.log(this.resultIndex);
     },
     canShowResultPopHandle() {
-      alert('抽奖成功')
+      alert('抽奖成功');
+      // 适当时机清楚抽奖记录
+      setTimeout(() => {
+        this.resultIndex = -1;
+      }, 3000)
     }
   }
 }
