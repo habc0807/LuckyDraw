@@ -1,9 +1,10 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png" />
+    <img alt="Vue logo" src="./assets/logo.min.png" />
     <Game
         :prizesList="prizes"
         :resultIndex.sync="resultIndex"
+        :test="test"
         @canShowResultPop="canShowResultPopHandle"
     />
   </div>
@@ -21,9 +22,16 @@ export default {
   data() {
     return {
       prizes: prizes,
-      resultIndex: 3
+      resultIndex: 3,
+      test: 1,
     }
   },
+  // created() {
+  //   setTimeout(() => {
+  //     this.prizes = prizes;
+  //     console.log(this.prizes)
+  //   }, 100)
+  // },
   methods: {
     canShowResultPopHandle() {
       // console.log('抽奖成功')
