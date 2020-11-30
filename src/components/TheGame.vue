@@ -4,7 +4,7 @@
       v-for="(item, index) in prizes"
       :key="item.giftId"
       class="prize-item"
-      :class="[item.isChose  ? 'speed-chose' : '', stopIndex === index ? 'stop' : '', item.giftId === 'heart' ? 'times-9' : '' ]"
+      :class="[item.isChose  ? 'speed-chose' : '', stopIndex === index ? 'stop' : '']"
     >
       <img class="prize-item-thumb" :src="item.giftPic" :alt="index + 1" />
       <span class="prize-index">{{index}}</span>
@@ -45,18 +45,9 @@ export default {
     console.log(this.resultIndex)
   },
   watch: {
-    prizesList: {
-      handle(v){
-        console.log('v:::', v);
-        this.prizes = v
-      },
-      deep: true,
-      immediate: true
-    },
-    
     resultIndex: {
       handle(v){
-        console.log(v)
+        console.log('resultIndex: ', resultIndex);
         if (v !== -1) {
           if (this.arrNum.indexOf(v) !== -1) {
             this.stopIndex = this.arrNum.indexOf(v);

@@ -1,9 +1,8 @@
 <template>
   <div>
-    <!-- <img alt="Vue logo" src="./assets/logo.min.png" /> -->
-    <Game
+    <TheGame
         :prizesList="prizes"
-        :resultIndex.sync="resultIndex"
+        :resultIndex="resultIndex"
         :test="test"
         @canShowResultPop="canShowResultPopHandle"
     />
@@ -12,13 +11,13 @@
 </template>
 
 <script>
-import Game from './components/Game.vue'
+import TheGame from './components/TheGame.vue'
 import { prizes } from './config.js'
 
 export default {
   name: 'App',
   components: {
-    Game
+    TheGame
   },
   data() {
     return {
@@ -36,9 +35,10 @@ export default {
   methods: {
     onStart() {
       this.resultIndex = 3;
+      console.log(this.resultIndex);
     },
     canShowResultPopHandle() {
-      // console.log('抽奖成功')
+      console.log('抽奖成功')
     }
   }
 }

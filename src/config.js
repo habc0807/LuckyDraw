@@ -2,30 +2,37 @@ import icon from './assets/icons/icon.png'
 export const prizes = [
     {
       "giftPic": icon,
-      "giftId": "props"
+      "giftId": "23423",
+      "isChose": false
     },
     {
       "giftPic": icon,
-      "giftId": "heart"
+      "giftId": "heart",
+      "isChose": false
     },
     {
       "giftPic": icon,
-      "giftId": "1605522697129"
+      "giftId": "1605522",
+      "isChose": false
     },
     {
       "giftPic": icon,
-      "giftId": "1605522939897"
+      "giftId": "39897",
+      "isChose": false
     },
     {
       "giftPic": icon,
-      "giftId": "1605523069233"
+      "giftId": "16055",
+      "isChose": false
     },
     {
       "giftPic": icon,
-      "giftId": "1605523278148"
+      "giftId": "148",
+      "isChose": false
     },
     {
       "giftPic": icon,
-      "giftId": "1605523400896"
+      "giftId": "896",
+      "isChose": false
     }
   ];
