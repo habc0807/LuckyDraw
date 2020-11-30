@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <TheGame
-        :prizesList="prizes"
-        :resultIndex="resultIndex"
-        :test="test"
-        @canShowResultPop="canShowResultPopHandle"
-    />
-    <div class="btn" @click="onStart">抽奖</div>
-  </div>
+  <TheGame
+      :prizesList="prizes"
+      :resultIndex="resultIndex"
+      :test="test"
+      @canShowResultPop="canShowResultPopHandle"
+  />
+  <div class="btn" @click="onStart">抽奖</div>
 </template>
 
 <script>
@@ -26,19 +24,13 @@ export default {
       test: 1,
     }
   },
-  // created() {
-  //   setTimeout(() => {
-  //     this.prizes = prizes;
-  //     console.log(this.prizes)
-  //   }, 100)
-  // },
   methods: {
     onStart() {
       this.resultIndex = 3;
       console.log(this.resultIndex);
     },
     canShowResultPopHandle() {
-      console.log('抽奖成功')
+      alert('抽奖成功')
     }
   }
 }

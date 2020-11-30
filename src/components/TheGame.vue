@@ -46,8 +46,8 @@ export default {
   },
   watch: {
     resultIndex: {
-      handle(v){
-        console.log('resultIndex: ', resultIndex);
+      handler(v){
+        // console.log('resultIndex: ', resultIndex);
         if (v !== -1) {
           if (this.arrNum.indexOf(v) !== -1) {
             this.stopIndex = this.arrNum.indexOf(v);
@@ -178,7 +178,7 @@ export default {
       opacity: 0;
       background: rgba(255, 255, 255, 0.5);
       background: url("../assets/icons/120-120.min.png") no-repeat;
-      background-size: 50px 50px;
+      background-size: 60px 60px;
     }
   }
   .speed-chose,
@@ -190,7 +190,7 @@ export default {
       opacity: 1;
     }
     .prize-item-thumb {
-      transform: scale(1.5);
+      transform: scale(1.3);
     }
   }
 }
