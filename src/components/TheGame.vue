@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import Cubic from '../helpers/Cubic'
+
 export default {
   name: 'Game',
   props: {
@@ -36,8 +38,14 @@ export default {
       timer1: null, // 定时器1 快速旋转
       timer2: null, // 定时器2 慢速旋转
       stopIndex: -1, // 指针最终的位置 是arrNum[resultIndex] 转动终止的映射
-      fastSpeed:  100, // 抽奖动画，经过每个商品的时间
+      fastSpeed: 100, // 抽奖动画，经过每个商品的时间
       slowSpeed: 200, // 抽奖动画，经过每个商品的时间
+      c: new Cubic(0.25, 0.1, 0.25, 1), // 贝塞尔曲线
+      startSetSpeedTime: null,
+      totalSpeedTime: 1000,
+      progress: 0,
+      progressTime: 100, // 计算出减速后的时间
+      RAF: null,
     }
   },
   created() {
@@ -98,6 +106,7 @@ export default {
 
     // 抽奖移动函数 如果指针位置prizeIndex与结果位置相同，则抽奖完成，清除所有定时器
     slowMove() {
+      console.log("this.progressTime:::", this.progressTime);
       const { prizes, arrNum, prizeIndex, resultIndex, stopIndex } = this;
       const LEN = prizes.length;
 
@@ -107,7 +116,8 @@ export default {
       if (stopIndex !== -1 && stopIndex === prizeIndex) {
         clearInterval(this.timer1);
         clearInterval(this.timer2);
-
+        // this.progress = 0;
+        // this.progressTime = 100;
         this.$emit('canShowResultPop');
       } else {
         this.prizeIndex = prizeIndex + 1 === LEN ? 0 : prizeIndex + 1;
@@ -117,7 +127,31 @@ export default {
     // 抽奖慢速转动 得到抽奖结果，定位好结果奖品的位置，速度降低
     lowSpeed() {
       const { arrNum, resultIndex } = this;
+      this.startSetSlowSpeed()
+      console.log('this.progressTime:::', this.progressTime)
       this.timer2 = setInterval(this.slowMove, this.slowSpeed);
+      // this.timer2 = setInterval(this.slowMove, this.progressTime);
+    },
+
+    // 设置慢速时间
+    startSetSlowSpeed() {
+      this.startSetSpeedTime = performance.now();
+      window.requestAnimationFrame(this.anim);
+    },
+
+    // time由window.requestAnimationFrame传入 和 performance.now() 相同
+    anim(time) {
+      const { c, startSetSpeedTime, totalSpeedTime, fastSpeed } = this;
+      this.progress = ((time - startSetSpeedTime) / totalSpeedTime)
+      if (this.progress >= 1) {
+        this.RAF = null;
+      } else {
+        this.RAF = window.requestAnimationFrame(this.anim)
+        this.progressTime =
+          fastSpeed > c.solve(this.progress) * 1000 
+            ? fastSpeed
+            : c.solve(this.progress) * 1000
+      }
     },
 
     destroyed() {
@@ -137,7 +171,6 @@ export default {
   align-content: flex-start;
   .prize-item {
     position: relative;
-
     display: flex;
 
     width: 50px;
@@ -186,7 +219,6 @@ export default {
     position: relative;
     &::before {
       transition: 0.1s;
-
       opacity: 1;
     }
     .prize-item-thumb {
